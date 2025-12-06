@@ -20,10 +20,13 @@ function MedicalRAGApp() {
           ? `/api/drugs/v1/explainDrug?drugName=${encodeURIComponent(query)}`
           : `/api/drugs/v1/suggestDrug?query=${encodeURIComponent(query)}`;
 
-      const result = await fetch(`http://localhost:8080${endpoint}`, {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-      });
+      const result = await fetch(
+        `https://drug-intelligence-system.onrender.com${endpoint}`,
+        {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+        }
+      );
 
       if (!result.ok) {
         throw new Error("API request failed");
