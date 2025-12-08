@@ -3,7 +3,6 @@ import Disclaimer from "./Disclaimer";
 import QueryForm from "./Queryform";
 import ResponseDisplay from "./ResponseDisplay";
 import TabNavigation from "./Tabnavigation";
-
 interface InteractiveDemoProps {
   activeTab: string;
   setActiveTab: (tab: string) => void;
