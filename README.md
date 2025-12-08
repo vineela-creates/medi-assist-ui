@@ -1,73 +1,104 @@
-# React + TypeScript + Vite
+# MediAssist App - Component Structure
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a refactored version of the MediAssist application, broken down into modular, reusable components.
 
-Currently, two official plugins are available:
+## Component Hierarchy
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+MediAssistApp (Main App)
+├── Navigation
+├── HeroSection
+│   └── CheckIcon
+├── ServicesSection
+│   ├── DrugIcon
+│   └── ClipboardIcon
+├── InteractiveDemo
+│   ├── TabNavigation
+│   ├── QueryForm
+│   ├── ResponseDisplay
+│   └── Disclaimer
+└── Footer
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## File Structure
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
 ```
+/
+├── MediAssistApp.tsx           # Main application component
+├── components/
+│   ├── Navigation.tsx          # Top navigation bar
+│   ├── HeroSection.tsx         # Hero/welcome section
+│   ├── ServicesSection.tsx     # Services information section
+│   ├── InteractiveDemo.tsx     # Interactive query demo section
+│   ├── TabNavigation.tsx       # Tab switcher (Drug/Symptom)
+│   ├── QueryForm.tsx           # Query input form
+│   ├── ResponseDisplay.tsx     # API response display
+│   ├── Disclaimer.tsx          # Medical disclaimer
+│   ├── Footer.tsx              # Page footer
+│   └── icons/
+│       ├── CheckIcon.tsx       # Checkmark icon
+│       ├── DrugIcon.tsx        # Drug/flask icon
+│       └── ClipboardIcon.tsx   # Clipboard icon
+└── model/
+    └── MedicationInfo.ts       # TypeScript interface (not included, use existing)
+```
+
+## Component Descriptions
+
+### Main Components
+
+- **MediAssistApp**: The root component that manages state and coordinates all other components
+- **Navigation**: Displays the top navigation bar with logo and menu links
+- **HeroSection**: Welcome section with key features and CTA button
+- **ServicesSection**: Information about drug database and symptom analysis features
+- **InteractiveDemo**: Interactive section where users can query drug info or symptoms
+- **Footer**: Page footer with links and contact information
+
+### Sub-Components
+
+- **TabNavigation**: Toggle between "Drug Information" and "Symptom Analysis" modes
+- **QueryForm**: Text input and submit button for queries
+- **ResponseDisplay**: Displays the API response from medication queries
+- **Disclaimer**: Medical disclaimer warning
+
+### Icon Components
+
+- **CheckIcon**: Checkmark/success icon
+- **DrugIcon**: Flask/beaker icon for drug information
+- **ClipboardIcon**: Clipboard with checkmark icon for symptom analysis
+
+## Benefits of This Structure
+
+1. **Modularity**: Each component has a single responsibility
+2. **Reusability**: Components can be easily reused in other parts of the app
+3. **Maintainability**: Easier to find and fix bugs in specific components
+4. **Testability**: Each component can be tested independently
+5. **Readability**: Smaller files are easier to understand and navigate
+6. **Scalability**: Easy to add new features without affecting existing code
+
+## Usage
+
+Import the main component:
+
+```tsx
+import MediAssistApp from "./MediAssistApp";
+
+function App() {
+  return <MediAssistApp />;
+}
+```
+
+## Props Interface
+
+Key props passed through the component tree:
+
+- **activeTab**: Current tab ("drug" or "symptom")
+- **query**: User's input text
+- **medicationResponse**: API response data
+- **loading**: Loading state
+- **handleSubmit**: Function to submit query
+- **handleKeyPress**: Keyboard event handler
+
+## State Management
+
+State is managed in the main `MediAssistApp` component and passed down as props. Consider using Context API or a state management library (Redux, Zustand) for more complex state needs.
