@@ -14,6 +14,11 @@ function MediAssistApp() {
   );
   const [loading, setLoading] = useState(false);
 
+  const handleTabChange = (tab: string) => {
+    setActiveTab(tab);
+    setQuery("");
+    setMedicationResponse({} as MedicationInfo);
+  };
   const handleSubmit = async () => {
     if (!query.trim()) return;
 
@@ -63,7 +68,7 @@ function MediAssistApp() {
       <ServicesSection />
       <InteractiveDemo
         activeTab={activeTab}
-        setActiveTab={setActiveTab}
+        setActiveTab={handleTabChange}
         query={query}
         setQuery={setQuery}
         loading={loading}
