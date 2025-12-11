@@ -1,4 +1,5 @@
 import type { MedicationInfo } from "../model/MedicationInfo";
+import type { SymptomDiagnosisResponse } from "../model/SymptomInfo";
 import Disclaimer from "./Disclaimer";
 import QueryForm from "./Queryform";
 import ResponseDisplay from "./ResponseDisplay";
@@ -10,6 +11,7 @@ interface InteractiveDemoProps {
   setQuery: (query: string) => void;
   loading: boolean;
   medicationResponse: MedicationInfo;
+  symptomResponse: SymptomDiagnosisResponse;
   handleSubmit: () => void;
   handleKeyPress: (e: React.KeyboardEvent<HTMLTextAreaElement>) => void;
 }
@@ -21,6 +23,7 @@ export default function InteractiveDemo({
   setQuery,
   loading,
   medicationResponse,
+  symptomResponse,
   handleSubmit,
   handleKeyPress,
 }: InteractiveDemoProps) {
@@ -46,9 +49,9 @@ export default function InteractiveDemo({
           <ResponseDisplay
             activeTab={activeTab}
             medicationResponse={medicationResponse}
+            symptomResponse={symptomResponse}
           />
         </div>
-
         <Disclaimer />
       </div>
     </section>
