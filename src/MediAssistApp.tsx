@@ -36,8 +36,8 @@ function MediAssistApp() {
           : `/api/drugs/v1/suggestDrug?query=${encodeURIComponent(query)}`;
 
       const result = await fetch(
-        //`https://drug-intelligence-system.onrender.com${endpoint}`,
-        `http://localhost:8080${endpoint}`,
+        `https://drug-intelligence-system.onrender.com${endpoint}`,
+        //`http://localhost:8080${endpoint}`,
 
         {
           method: "GET",
