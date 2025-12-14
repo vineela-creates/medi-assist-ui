@@ -14,6 +14,7 @@ interface InteractiveDemoProps {
   symptomResponse: SymptomDiagnosisResponse;
   handleSubmit: () => void;
   handleKeyPress: (e: React.KeyboardEvent<HTMLTextAreaElement>) => void;
+  handleSeeDemo: () => void;
 }
 
 export default function InteractiveDemo({
@@ -26,6 +27,7 @@ export default function InteractiveDemo({
   symptomResponse,
   handleSubmit,
   handleKeyPress,
+  handleSeeDemo,
 }: InteractiveDemoProps) {
   return (
     <section className="py-16 bg-white">
@@ -34,7 +36,11 @@ export default function InteractiveDemo({
           Try MediAssist Now
         </h2>
 
-        <TabNavigation activeTab={activeTab} setActiveTab={setActiveTab} />
+        <TabNavigation
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+          onSeeDemo={handleSeeDemo}
+        />
 
         <div className="bg-white rounded-lg shadow-lg p-8 border border-gray-200">
           <QueryForm
