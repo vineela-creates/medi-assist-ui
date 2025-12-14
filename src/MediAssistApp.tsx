@@ -24,24 +24,23 @@ function MediAssistApp() {
     setMedicationResponse({} as MedicationInfo);
     setSymptomResponse({} as SymptomDiagnosisResponse);
   };
+
   const handleSubmit = async () => {
     if (!query.trim()) return;
 
     setLoading(true);
 
     try {
+      // Using Vercel proxy endpoints instead of direct EC2 URL
       const endpoint =
         activeTab === "drug"
           ? `/api/drugs/v1/explainDrug?drugName=${encodeURIComponent(query)}`
           : `/api/drugs/v1/suggestDrug?query=${encodeURIComponent(query)}`;
 
-      const result = await fetch(
-        `http://ec2-3-109-59-249.ap-south-1.compute.amazonaws.com:8080${endpoint}`,
-        {
-          method: "GET",
-          headers: { "Content-Type": "application/json" },
-        }
-      );
+      const result = await fetch(endpoint, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      });
 
       if (!result.ok) {
         throw new Error("API request failed");
