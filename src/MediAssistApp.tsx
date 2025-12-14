@@ -34,8 +34,8 @@ function MediAssistApp() {
       // Using Vercel proxy endpoints instead of direct EC2 URL
       const endpoint =
         activeTab === "drug"
-          ? `/api/drugs/v1/explainDrug?drugName=${encodeURIComponent(query)}`
-          : `/api/drugs/v1/suggestDrug?query=${encodeURIComponent(query)}`;
+          ? `/api/explainDrug?drugName=${encodeURIComponent(query)}`
+          : `/api/suggestDrug?query=${encodeURIComponent(query)}`;
 
       const result = await fetch(endpoint, {
         method: "GET",
