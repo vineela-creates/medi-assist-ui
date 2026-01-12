@@ -29,8 +29,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     // Your EC2 backend URL
     const EC2_BASE_URL =
       process.env.EC2_BASE_URL ||
-      "http://ec2-3-109-59-249.ap-south-1.compute.amazonaws.com:8080";
-
+      "http://13.200.149.16:8080"
     const response = await fetch(
       `${EC2_BASE_URL}/api/drugs/v1/explainDrug?drugName=${encodeURIComponent(
         drugName
